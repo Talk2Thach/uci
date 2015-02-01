@@ -1,0 +1,16 @@
+Python 3.3.2 (default, Sep 27 2013, 18:19:58) 
+[GCC 4.2.1 Compatible Apple LLVM 5.0 (clang-500.2.75)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> print('Hello')
+Hello
+>>> print(123 + 456)
+579
+>>> print(2 ** 5)
+32
+>>> print(5 * 4 * 3 * 2 * 1)
+120
+>>> number_of_students = 32
+>>> number_of_staff = 2
+>>> print(number_of_students / number_of_staff)
+16.0
+>>> 
