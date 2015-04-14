@@ -1,0 +1,53 @@
+S
+Pulp Fiction
+U
+Pulp Fiction
+1994
+5
+U
+Forrest Gump
+1994
+5
+U
+Django Unchained
+2012
+4
+U
+Gone with the Wind
+1939
+4
+S
+Avatar
+U
+Avatar
+2009
+3
+U
+Requiem for a Dream
+2000
+5
+U
+Harry Potter and the Prisoner of Azkaban
+2004
+2
+U
+Se7en
+1995
+4
+U
+A Separation
+2011
+5
+S
+Pulp Fiction
+U
+Mean Girls
+2004
+1
+S
+Mean Girls
+S
+Se7en
+S
+Midnight in Paris
+Q
