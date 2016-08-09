@@ -1,0 +1,30 @@
+C code                      | SIMPLESEM
+--------------------------------------------------------------------------------
+switch(expression) {        |
+  case constant-expression: | jumpt <statement>, expression == const-expression
+                            |   jump <next case>
+    statement(s);           |   # statement...
+                                jump <next statement> # fallthrough
+  case constant-expression: | jumpt <statement>, expression == const-expression
+  case constant-expression: | jumpt <statement>, expression == const-expression
+                            |   jump <default>
+    statement(s);           |   # statement...
+    break;                  |   jump <end switch>
+  default:                  |
+    statement(s);           |   # default statement...
+}                           | # end switch
+--------------------------------------------------------------------------------
+
+Note:
+
+1. Each `case` is translated into `jumpt`.
+
+2. Before each group of statements in each `case`, there is a `jump` to skip
+   the statements when checked conditions fail.
+   The `jump` will go to: 1) next `case`; 2) `default`; or 3) <end switch>
+   depending on which one comes next.
+
+3. After each group of statements there will be a `jump` that either
+   1) fallthrough to next group of statements; or
+   2) jump to the end of switch when it's `break`
+   If it's the last `case` (no default) or `default`, there is no need for such jump

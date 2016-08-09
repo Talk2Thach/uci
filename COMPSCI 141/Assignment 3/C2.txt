@@ -1,0 +1,16 @@
+set 0, 0              # n = 0
+set 1, 0              # m = 0
+jump 10               # <gcd> jump <main>
+jumpt 9, D[1] == D[0] # <while> jump <end while> if not m != n
+jumpt 7, D[0] <= D[1] # jump <else> if not n > m
+set 0, D[0] - D[1]    # n = n - m
+jump 8                # jump <end if>
+set 1, D[1] - D[0]    # m = m - n
+jump 3                # jump <while>
+jump D[2]             # jump <return point>
+set 0, read           # <main> get n
+set 1, read           # get m
+set 2, 14             # set return point
+jump 3                # jump <gcd>
+set write, D[0]       # print D[0]
+halt                  # halt

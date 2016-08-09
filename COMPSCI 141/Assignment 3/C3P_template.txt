@@ -1,0 +1,48 @@
+# Call Sequence
+
+set 1, D[1] + 1                             | Allocate return field in caller | Optional
+set D[1], <IP> + 4 + <number of parameters> | Set return point                | See note
+set D[1] + 1, D[0]                          | Set dynamic link                |
+set D[1] + 2, <parameter 1>                 | Set parameter(s)                | Optional
+set D[1] + 3, <parameter 2>                 | Set parameter(s)                | Optional
+......                                      | Set parameter(s)                | Optional
+set 0, D[1]                                 | Set current                     |
+set 1, D[1] + <AR>                          | Set free                        | See note
+jump start_addr                             | Goto function                   |
+
+
+
+# Return Sequence
+
+set D[0] - 1, <return value>                | Set return field in caller      | Optional
+set 1, D[0]                                 | Restore free                    |
+set 0, D[D[0] + 1]                          | Restore current                 |
+jump D[D[1]]                                | Goto return point               |
+
+
+
+# Note
+
+In this design, callee's AR now contains all parameters before callee's own local variables
+
++------+--------------+
+| D[0] | return point |\
++---------------------+ \
+| D[1] | dynamic link |  \
++---------------------+   \
+| D[2] | parameter(s) |    \
+| ...  | ...          |      Callee's
++---------------------+      AR
+| D[x] | local var(s) |    /
+| ...  | ...          |   /
++---------------------+  /
+| D[y] | return val   | /
+| ...  | ...          |/
++------+--------------+
+
+When setting free, AR's size = 1 + 1 + <number of parameters> + <number of local vars>,
+which is the size of all allocated space.
+Return value(s) do not count here because they are allocated on demand.
+
+When setting return point, because it requires n additional instruction to set n parameter,
+return point = <IP> + 4 + n

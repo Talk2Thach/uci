@@ -1,0 +1,36 @@
+set 0, 0                                # set current
+set 1, 3                                # set free
+jump 27                                 # jump <main>
+jumpt 8, D[D[0] + 2] > 2                # <fib> jump <else> if not n <= 2
+set D[0] - 1, 1                         # return = 1
+set 1, D[0]                             # restore free
+set 0, D[D[0] + 1]                      # restore current
+jump D[D[1]]                            # jump return point
+set 1, D[1] + 1                         # <else> allocate return value
+set D[1], 10 + 5                        # set return point
+set D[1] + 1, D[0]                      # set dynamic link
+set D[1] + 2, D[D[0] + 2] - 2           # set parameter = n - 2
+set 0, D[1]                             # set current
+set 1, D[1] + 4                         # set free
+jump 3                                  # jump <fib>
+set D[0] + 3, D[D[0] + 4]               # local = return value
+set 1, D[1] + 1                         # allocate return value
+set D[1], 18 + 5                        # set return point
+set D[1] + 1, D[0]                      # set dynamic link
+set D[1] + 2, D[D[0] + 2] - 1           # set parameter = n - 1
+set 0, D[1]                             # set current
+set 1, D[1] + 4                         # set free
+jump 3                                  # jump <fib>
+set D[0] - 1, D[D[0] + 5] + D[D[0] + 3] # return = return value + local
+set 1, D[0]                             # restore free
+set 0, D[D[0] + 1]                      # restore current
+jump D[D[1]]                            # jump return point
+set 2, read                             # <main> get n
+set 1, D[1] + 1                         # allocate return value
+set D[1], 30 + 5                        # set return point
+set D[1] + 1, D[0]                      # set dynamic link
+set D[1] + 2, D[2]                      # set parameter = n
+set 0, D[1]                             # set current
+set 1, D[1] + 4                         # set free
+jump 3                                  # jump <fib>
+halt                                    # halt

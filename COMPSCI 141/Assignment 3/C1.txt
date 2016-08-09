@@ -1,0 +1,14 @@
+set 0, 3               # a = 3
+set 1, 1               # b = 1
+set 2, 0 - 1           # c = -1
+jumpt 10, D[0] <= D[2] # <while> jump <end while> if not a > c
+jumpt 7, D[0] != 0     # jump <else> if not a == 0
+set write, D[1]        # print b
+jump 8                 # jump <end if>
+set 1, D[0] + D[1]     # <else> b = b + a
+set 0, D[0] - 1        # <end if> a = a - 1
+jump 3                 # jump <while>
+set write, D[0]        # print a
+set write, D[1]        # print b
+set write, D[2]        # print c
+halt                   # halt
